@@ -33,6 +33,21 @@ public class ArrayQueue {
     }
 
     /**
+     * 实现初始数组的环形使用
+     */
+    public int fetchRoundQueue(){
+        if (this.front >= this.rear) throw new RuntimeException("取完了");
+        int head = this.queue[0];
+        
+        for (int i=1;i<queue.length;i++){
+            this.queue[i-1] = this.queue[i];
+        }
+//        if (rear - 1 >= 0) System.arraycopy(this.queue, 0, this.queue, 1, rear - 1);
+        rear--;
+        return head;
+    }
+
+    /**
      * for (int i=0;i<length;i++){
      *    queue[i] = this.queue[++front];
      * }
@@ -41,7 +56,7 @@ public class ArrayQueue {
     public String toString(){
         int rear = this.rear;
         int front = this.front;
-        if (rear<0) return "[]";
+//        if (rear<0) return "[]";
         int length = rear - front;
         int[] queue = new int[length];
         for (int i=0;i<length;i++){
