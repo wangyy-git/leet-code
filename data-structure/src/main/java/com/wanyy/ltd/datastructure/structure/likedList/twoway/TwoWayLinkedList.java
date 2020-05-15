@@ -20,6 +20,34 @@ public class TwoWayLinkedList {
         newNode.pre = temp;
     }
     
+    void addNodeByOrder(HeroNode newNode){
+        HeroNode current = this.headNode;
+        HeroNode currentNext;
+        HeroNode currentPre;
+        while (true){
+            if (current.next == null){
+                System.out.println("新插入节点为最后一位....");
+                newNode.pre = current;
+                current.next = newNode;
+                break;
+            }
+            if (current.next.no > newNode.no){
+                //应该是current.next将原地址给了currentNext
+                //然后获取了一个新地址
+                currentNext = current.next;
+                currentPre = current.pre;
+                
+                current.next = newNode;
+                newNode.next = currentNext;
+                System.out.println("----" + (currentNext == current.next));
+                newNode.pre = current;
+                currentPre.pre = newNode;
+                break;
+            }
+            current = current.next;
+        }
+    }
+    
     void deleteNode(HeroNode delNode){
         HeroNode temp = this.headNode.next;
         
@@ -29,13 +57,20 @@ public class TwoWayLinkedList {
         }
         
         while (true){
-            if (temp.next == null){
-                System.out.println("未找到待删除的节点");
+            //相比单链的一个额外判断 要不就temp.next.pre = temp.pre报空指针
+            if (temp.no == delNode.no && temp.next == null){
+                System.out.println("待删除节点为最后一个节点");
+                temp.pre.next = temp.next;
                 break;
             }
+            
             if (temp.no == delNode.no){
                 temp.pre.next = temp.next;
                 temp.next.pre = temp.pre;
+                break;
+            }
+            if (temp.next == null){
+                System.out.println("未找到待删除的节点");
                 break;
             }
             temp = temp.next;
@@ -49,14 +84,10 @@ public class TwoWayLinkedList {
             System.out.println("这是一个空链表....");
             return;
         }
-        while (true){
-            
-            if (temp == null){
-                break;
-            }
+        while (temp != null) {
             System.out.println(temp);
             temp = temp.next;
-            
+
         }
     }
 }

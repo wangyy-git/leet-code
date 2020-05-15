@@ -14,8 +14,15 @@ public class TlTest {
         HeroNode h8 = new HeroNode(8,"混沌");
         
         TwoWayLinkedList linkedList = new TwoWayLinkedList();
-        linkedList.addNode(h1);
+        linkedList.addNodeByOrder(h1);
+        linkedList.addNodeByOrder(h6);
+        linkedList.addNodeByOrder(h3);
+        linkedList.addNodeByOrder(h4);
+        linkedList.addNodeByOrder(h2);
         
+        
+//        linkedList.addNode(h3);
+//        linkedList.deleteNode(h4);
         linkedList.iteratorByHead();
     }
 }
