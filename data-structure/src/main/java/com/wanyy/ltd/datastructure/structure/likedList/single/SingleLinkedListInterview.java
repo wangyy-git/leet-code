@@ -1,6 +1,5 @@
-package com.wanyy.ltd.datastructure.structure.likedList;
+package com.wanyy.ltd.datastructure.structure.likedList.single;
 
-import javax.xml.soap.Node;
 import java.util.Stack;
 
 class SingleLinkedListInterview {
@@ -48,19 +47,15 @@ class SingleLinkedListInterview {
         }
         HeroNode current = headNode.next;
         HeroNode curNext;
-        
         HeroNode newHeadNode = new HeroNode(0,"");
-        
         //自己之前没有保存current.next 导致current被重新赋值后其next的丢失
         //注意此处涉及到内存地址的相互指向
         //所以要注意赋值的形式
         while (current != null){
-            
             curNext = current.next;
             current.next = newHeadNode.next;
             newHeadNode.next = current;
             current = curNext;
-            
         }
         
         headNode.next = newHeadNode.next;
@@ -83,7 +78,6 @@ class SingleLinkedListInterview {
             stack.add(temp);
             temp = temp.next;
         }
-        
         while (!stack.empty()){
             System.out.println(stack.pop());
         }

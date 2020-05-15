@@ -1,4 +1,4 @@
-package com.wanyy.ltd.datastructure.structure.likedList;
+package com.wanyy.ltd.datastructure.structure.likedList.single;
 
 public class SingleLinkedList {
     
@@ -63,13 +63,13 @@ public class SingleLinkedList {
 }
 
 class HeroNode{
-    public int no;
-    public String name;
+    int no;
+    String name;
     //自己当时理解的是存的地址的具体信息
     //其实存的就是对象 他本身就是一个地址
-    public HeroNode next;
+    HeroNode next;
 
-    public HeroNode(int no, String name) {
+    HeroNode(int no, String name) {
         this.no = no;
         this.name = name;
     }

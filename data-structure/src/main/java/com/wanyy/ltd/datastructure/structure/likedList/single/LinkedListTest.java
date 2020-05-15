@@ -1,7 +1,5 @@
-package com.wanyy.ltd.datastructure.structure.likedList;
+package com.wanyy.ltd.datastructure.structure.likedList.single;
 
-
-import java.util.Stack;
 
 public class LinkedListTest {
 
