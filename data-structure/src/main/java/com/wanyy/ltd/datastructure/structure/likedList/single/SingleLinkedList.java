@@ -24,7 +24,7 @@ public class SingleLinkedList {
             //此处node.next虽然与node的类型是一样的，但是性质是不一样的
             //一个是变量  一个是变量的属性  所以不能相互替换
             HeroNode tempNext = temp.next;
-            if (tempNext == null || temp.next.no > newNode.no){
+            if (tempNext == null || tempNext.no > newNode.no){
                 newNode.next = tempNext;
                 temp.next = newNode;
                 break;

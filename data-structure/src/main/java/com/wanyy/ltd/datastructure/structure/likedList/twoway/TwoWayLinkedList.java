@@ -39,7 +39,7 @@ public class TwoWayLinkedList {
                 
                 current.next = newNode;
                 newNode.next = currentNext;
-                System.out.println("----" + (currentNext == current.next));
+                
                 newNode.pre = current;
                 currentPre.pre = newNode;
                 break;
