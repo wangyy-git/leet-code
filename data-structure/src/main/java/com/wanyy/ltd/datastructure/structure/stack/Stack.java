@@ -1,12 +1,16 @@
 package com.wanyy.ltd.datastructure.structure.stack;
 
 public class Stack<T> {
-    private int maxSize;
+    private int maxSize = 8;
     private int top = -1;
     private Object[] array;;
 
     public Stack(int maxSize) {
         this.maxSize = maxSize;
+        array = new Object[maxSize];
+    }
+    
+    public Stack(){
         array = new Object[maxSize];
     }
 
@@ -17,8 +21,8 @@ public class Stack<T> {
     boolean isEmpty(){
         return top == -1;
     }
-    
-    void push(T value){
+
+    public void push(T value){
         if (isFull()){
             System.out.println("已经要溢出了");
             return;
@@ -27,14 +31,14 @@ public class Stack<T> {
     }
     
     @SuppressWarnings("unchecked")
-    T pop(){
+    public T pop(){
         if (isEmpty()) {
             throw new RuntimeException("一滴也没有了。。。");
         }
         return (T)array[top--];
     }
-    
-    void iter(){
+
+    public void iter(){
         for (int i=0;i<=top;i++){
             System.out.print(array[i] + "\t");
         }
