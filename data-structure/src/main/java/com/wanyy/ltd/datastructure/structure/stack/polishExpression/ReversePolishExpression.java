@@ -13,8 +13,7 @@ public class ReversePolishExpression {
     public static void main(String[] args) {
         String expression = "13 4 + 5 * 6 -";
         String[] chars = expression.split(" ");
-        Stack<Integer> numStack = new Stack<>(8);
-        
+        Stack<Integer> numStack = new Stack<>();
         
         Arrays.stream(chars).forEach(ch -> {
             
