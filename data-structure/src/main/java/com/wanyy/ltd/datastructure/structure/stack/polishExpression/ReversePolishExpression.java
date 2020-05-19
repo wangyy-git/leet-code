@@ -12,11 +12,16 @@ public class ReversePolishExpression {
 
     public static void main(String[] args) {
         String expression = "13 4 + 5 * 6 -";
-        String[] chars = expression.split(" ");
-        Stack<Integer> numStack = new Stack<>();
+        calculateSuffix(expression);
         
+    }
+    
+    public static void calculateSuffix(String suffixExpression){
+        String[] chars = suffixExpression.split(" ");
+        Stack<Integer> numStack = new Stack<>();
+
         Arrays.stream(chars).forEach(ch -> {
-            
+
             if(ch.matches("\\d+")){
                 numStack.push(Integer.valueOf(ch));
             } else {
