@@ -3,7 +3,7 @@ package com.wanyy.ltd.datastructure.structure.likedList.singleCircle;
 public class CircleTest {
 
     public static void main(String[] args) {
-        HeroNode h1 = new HeroNode(3);
+        HeroNode h1 = new HeroNode(6);
         
         SingleCircleList circle = new SingleCircleList();
         circle.addNode(h1);

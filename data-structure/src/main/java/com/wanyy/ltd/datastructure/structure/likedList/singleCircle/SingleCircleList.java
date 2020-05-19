@@ -94,7 +94,7 @@ public class SingleCircleList {
 
                 temp = temp.next;
                 pre.next = temp;
-//                continue;
+                continue;
             } 
             countNum++;
             pre = temp;
