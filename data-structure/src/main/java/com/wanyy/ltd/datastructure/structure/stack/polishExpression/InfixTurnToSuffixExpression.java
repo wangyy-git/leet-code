@@ -19,7 +19,9 @@ import java.util.Stack;
  * 8) 依次弹出s2中的元素并输出，结果的逆序即为中缀表达式对应的后缀表达式；
  */
 public class InfixTurnToSuffixExpression {
-
+    /**
+     * 中缀转后缀
+     */
     public static String turn(String infixExpression) {
         String[] splits = infixExpression.split("");
         Stack<String> numStack = new Stack<>();
@@ -28,14 +30,56 @@ public class InfixTurnToSuffixExpression {
         //为了方便探寻后一位 所以用for i循环
         for (int i = 0; i < splits.length; i++) {
             String str = splits[i];
-            boolean nextIsNum = false;
+            System.out.println("当前被操作字符为： -> " + str);
             if (str.matches("\\d")){
                 numStack.push(str);
-                if (splits[i+1].matches("\\d")){
-                    
+                while (i+1 < splits.length && splits[i + 1].matches("\\d")) {
+                    String next = numStack.pop();
+                    numStack.push(next.concat(splits[i + 1]));
+                    i++;
+                }
+            } else {
+                if ("+-*/".contains(str)){
+                    opOperatorStack(str,numStack,operatorStack);
+                } else if ("(".equals(str)) {
+                    operatorStack.push(str);
+                } else if (")".equals(str)){
+                    while (true){
+                        if (("(").equals(operatorStack.peek())){
+                            System.out.println("左侧括号被弹出 -->" + operatorStack.pop());
+                            break;
+                        }
+                        numStack.push(operatorStack.pop());
+                    }
                 }
             }
         }
-        return "";
+
+        System.out.println("符号栈的内容依次压入数字栈");
+        while (!operatorStack.empty()){
+            numStack.push(operatorStack.pop());
+        }
+        StringBuilder builder = new StringBuilder();
+        while (!numStack.empty()){
+            builder.append(" ").append(numStack.pop());
+        }
+        builder.reverse();
+        String suffix = builder.toString();
+        return suffix.substring(0,suffix.length()-1);
+    }
+    
+    private static void opOperatorStack(String operator,Stack<String> numStack,Stack<String> operatorStack){
+        if (operatorStack.empty() || ("(").equals(operatorStack.peek())){
+            operatorStack.push(operator);
+        } else if (comparePriority(operator,operatorStack.peek())){
+            operatorStack.push(operator);
+        } else if (!comparePriority(operator,operatorStack.peek())) {
+            String pop = operatorStack.pop();
+            numStack.push(pop);
+            opOperatorStack(operator,numStack,operatorStack);
+        }
+    }
+    private static boolean comparePriority(String operator1,String operator2){
+        return OperatorPriorityEnum.getOpPriority(operator1) > OperatorPriorityEnum.getOpPriority(operator2);
     }
 }
