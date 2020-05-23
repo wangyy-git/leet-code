@@ -93,6 +93,7 @@ public class SingleCircleList {
 //                pre.next = temp.next;  //这样赋值导致整体是2-1-2-1-2  去掉3后应该是1-2-1-2
 
                 temp = temp.next;
+                assert pre != null;
                 pre.next = temp;
                 continue;
             } 
