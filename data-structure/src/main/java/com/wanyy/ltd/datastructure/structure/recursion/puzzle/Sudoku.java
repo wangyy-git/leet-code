@@ -5,6 +5,7 @@ import java.util.*;
 public class Sudoku {
 
     public static void main(String[] args) {
+        int[] remainNum = new int[9];
         Sudoku sudoku = new Sudoku();
         int[][] originSudoku = sudoku.generateOriginSudoku();
         
@@ -16,30 +17,53 @@ public class Sudoku {
     //按照方格来计算
     public boolean calSudoku(int[][] sudoku){
         showSudoku(sudoku);
+        int[] remainNum = null;
+        int iPosition = 0;
+        int jPosition = 0;
+        boolean flag = false;//记录是否找到当前位置为0
         for (int k = 0; k < 9; k++) {
             for (int l = 0; l < 9; l++) {
                 if (sudoku[k][l] == 0){
-                    int[] remainNum = getRemainNum(sudoku, k, l);
-                    System.out.println("remainNum -> " + Arrays.toString(remainNum));
-                    if (remainNum.length == 0){
-                        return false;
-                    }
-                    for (int v:remainNum){
-                        sudoku[k][l] = v;
-                        System.out.println("=====================");
-                        //可能是第一个值就让他return false了  应该一直算完
-                        if(calSudoku(sudoku)){
-                           break; 
-                        } else {
-                            System.out.printf("第%d行第%d列",k,l);
-                            sudoku[k][l] = 0; //这样是无法回溯到最初始的位置 关键是回溯的思路
-//                            return false;
-                        }
-                       
-                    }
+                    remainNum = getRemainNum(sudoku, k, l);
+                    iPosition = k;
+                    jPosition = l;
+                    System.out.println("位置remainNum -> " + Arrays.toString(remainNum));
+                    flag = true;
+                    break;
                 }
             }
+            
+            if (flag){
+                System.out.println("找到位置");
+//                flag = false;
+                break;
+            }
+            
         }
+        if (remainNum == null || remainNum.length == 0){
+            return false;
+        }
+        
+        if (iPosition == 8 && jPosition == 8 && sudoku[8][8] != 0){ //到最后一个位置且如果为空 
+            return true;
+        }
+        
+        for (int v:remainNum){
+            sudoku[iPosition][jPosition] = v;
+            System.out.println("=====================");
+            //可能是第一个值就让他return false了  应该一直算完
+            if(calSudoku(sudoku)){
+                break;
+            } else {
+                System.out.printf("第%d行第%d列",iPosition,jPosition);
+                sudoku[iPosition][jPosition] = 0; //这样是无法回溯到最初始的位置 关键是回溯的思路  
+                //所以回溯至此需要进行重新计算来保证方法的持续
+                
+                return false;
+            }
+
+        }
+        
         return true;
     }
     
