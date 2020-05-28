@@ -12,55 +12,82 @@ import java.util.Stack;
  */
 public class TwoLinkSum {
     public static void main(String[] args) {
-        ListNode l1 = new ListNode(2);
-        ListNode l11 = new ListNode(4);
-        ListNode l12 = new ListNode(3);
-        l1.next = l11;
-        l11.next = l12;
-
-        ListNode l2 = new ListNode(3);
-//        ListNode l21 = new ListNode(6);
-//        ListNode l22 = new ListNode(4);
-//        l2.next = l21;
-//        l21.next = l22;
-
-        System.out.println(Math.pow(10,1));
-        TwoLinkSum tw = new TwoLinkSum();
-        ListNode listNode = tw.answer(l1, l2);
-        System.out.println(listNode);
+        int i1 = 9; //5243
+        int i2 = 1999999999; //5564
+//        System.out.println(Integer.reverse(i1) + Integer.reverse(i2));
+        ListNode listNode1 = parseToListNode(i1 + "");
+        ListNode listNode2 = parseToListNode(i2 + "");
+        System.out.println(addTwoNumbers(listNode1, listNode2));
     }
 
-    private ListNode addTwoNumbersByStack(ListNode l1, ListNode l2){
+    private static ListNode addTwoNumbersByStack(ListNode l1, ListNode l2){
         Stack<Integer> s1 = new Stack<>();
+        ListNode temp = l1;
+        while (temp != null){
+            s1.add(temp.val);
+            temp = temp.next;
+        }
+        Stack<Integer> s2 = new Stack<>();
+        temp = l2;
+        while (temp != null){
+            s2.add(temp.val);
+            temp = temp.next;
+        }
+
+        ListNode head = new ListNode(0);
+        temp = head;
+        int ten = 0;
+        while (!(s1.empty() && s2.empty())){
+            int i1 = 0;
+            if (!s1.empty()) i1 = s1.pop();
+            int i2 = 0;
+            if (!s2.empty()) i2 = s2.pop();
+
+            int sum = ten + i1 + i2;
+            int mold = sum % 10;    //记录各位的值
+            ten = sum / 10;     //记录当前相加十位的值
+            
+            temp.next = new ListNode(mold);
+            temp = temp.next;
+            //少了一位
+            if((ten != 0) && (s1.empty() && s2.empty())){
+                temp.next = new ListNode(ten);
+            }
+        }
+        
+        return head.next;
+    }
+    /**
+     * 最初使用的是StringBuilder 然后使用reverse解析成int
+     * 自己这个做法是实现了表面的计算  但是是不对的
+     * 因为对于大位数的计算是总是会失效的 EG:超过了Integer的最大值
+     * 只有实现自动进位才是最正确的
+     */
+    private static ListNode addTwoNumbers(ListNode l1, ListNode l2){
+        int index = 0;
+        int intL1 = 0;
         ListNode temp1 = l1;
         while (true){
+            intL1 = temp1.val * (int)Math.pow(10,index++) + intL1;
             if (temp1.next == null){
-                s1.add(temp1.val);
                 break;
             }
-            s1.add(temp1.val);
             temp1 = temp1.next;
         }
 
-        int intL1 = 0;
-        int size1 = s1.size();
-        for (int i = 0; i < size1; i++) {
-            intL1 = s1.pop()*(int)Math.pow(10,size1--) + intL1;
-        }
-
-        StringBuilder sb2 = new StringBuilder();
         ListNode temp2 = l2;
+        index = 0;
+        int intL2 = 0;
         while (true){
+            intL2 = temp2.val * (int)Math.pow(10,index++) + intL2;
             if (temp2.next == null){
-                sb2.append(temp2.val);
                 break;
             }
-            sb2.append(temp2.val);
             temp2 = temp2.next;
         }
-        int intL2 = Integer.parseInt(sb2.reverse().toString());
-        int i1 = intL1 + intL2;
-        StringBuilder sbResult = new StringBuilder(i1 + "");
+        
+        int sum = intL1 + intL2;
+        StringBuilder sbResult = new StringBuilder(sum + "");
         String[] split = sbResult.reverse().toString().split("");
         ListNode head = new ListNode(Integer.parseInt(split[0]));
         for (int i = 1; i < split.length; i++) {
@@ -100,6 +127,18 @@ public class TwoLinkSum {
             cur.next = new ListNode(carry);
         }
         return pre.next;
+    }
+    
+    static ListNode parseToListNode(String str){
+        ListNode head = new ListNode(0);
+        String[] split = str.split("");
+        ListNode temp = head;
+        for (int i=split.length-1;i>=0;i--){
+            temp.next = new ListNode(Integer.parseInt(split[i]));
+            temp = temp.next;
+        }
+        
+        return head.next;
     }
 }
 
