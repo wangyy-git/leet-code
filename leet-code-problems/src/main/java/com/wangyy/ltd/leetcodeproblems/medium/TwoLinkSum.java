@@ -1,5 +1,7 @@
 package com.wangyy.ltd.leetcodeproblems.medium;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -12,22 +14,27 @@ import java.util.Stack;
  */
 public class TwoLinkSum {
     public static void main(String[] args) {
-        int i1 = 9; //5243
-        int i2 = 1999999999; //5564
+        int i1 = 3425; 
+        int i2 = 0; 
 //        System.out.println(Integer.reverse(i1) + Integer.reverse(i2));
         ListNode listNode1 = parseToListNode(i1 + "");
         ListNode listNode2 = parseToListNode(i2 + "");
-        System.out.println(addTwoNumbers(listNode1, listNode2));
+        System.out.println("l1 -> " + listNode1);
+        System.out.println("l2 -> " + listNode2);
+        System.out.println("我的 --> " + addTwoNumbersByStack(listNode1, listNode2));
+        System.out.println("答案 --> " + answer(listNode1, listNode2));
     }
 
+    //最终完善版本  只计算当前位数的数字
     private static ListNode addTwoNumbersByStack(ListNode l1, ListNode l2){
-        Stack<Integer> s1 = new Stack<>();
+        List<Integer> s1 = new ArrayList<>();
         ListNode temp = l1;
+        //此两处获取值并相加是可以合并的
         while (temp != null){
             s1.add(temp.val);
             temp = temp.next;
         }
-        Stack<Integer> s2 = new Stack<>();
+        List<Integer> s2 = new ArrayList<>();
         temp = l2;
         while (temp != null){
             s2.add(temp.val);
@@ -37,11 +44,17 @@ public class TwoLinkSum {
         ListNode head = new ListNode(0);
         temp = head;
         int ten = 0;
-        while (!(s1.empty() && s2.empty())){
+        int index = 0;
+        while (!(index >= s1.size() && index >= s2.size())){
             int i1 = 0;
-            if (!s1.empty()) i1 = s1.pop();
+            if (index < s1.size()) {
+                i1 = s1.get(index);
+            }
             int i2 = 0;
-            if (!s2.empty()) i2 = s2.pop();
+            if (index < s2.size()) {
+                i2 = s2.get(index);
+            }
+            index++;
 
             int sum = ten + i1 + i2;
             int mold = sum % 10;    //记录各位的值
@@ -50,7 +63,7 @@ public class TwoLinkSum {
             temp.next = new ListNode(mold);
             temp = temp.next;
             //少了一位
-            if((ten != 0) && (s1.empty() && s2.empty())){
+            if((ten != 0) && (index >= s1.size() && index >= s2.size())){
                 temp.next = new ListNode(ten);
             }
         }
@@ -104,7 +117,7 @@ public class TwoLinkSum {
         return head;
     }
     
-    public ListNode answer(ListNode l1, ListNode l2){
+    public static ListNode answer(ListNode l1, ListNode l2){
         ListNode pre = new ListNode(0);
         ListNode cur = pre;
         int carry = 0;
