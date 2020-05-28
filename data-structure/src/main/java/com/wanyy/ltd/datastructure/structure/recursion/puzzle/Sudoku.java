@@ -48,23 +48,31 @@ public class Sudoku {
             return true;
         }
         
-        for (int v:remainNum){
-            sudoku[iPosition][jPosition] = v;
-            System.out.println("=====================");
-            //可能是第一个值就让他return false了  应该一直算完
-            if(calSudoku(sudoku)){
-                break;
-            } else {
-                System.out.printf("第%d行第%d列",iPosition,jPosition);
-                sudoku[iPosition][jPosition] = 0; //这样是无法回溯到最初始的位置 关键是回溯的思路  
-                //所以回溯至此需要进行重新计算来保证方法的持续
-                
-                return false;
-            }
-
-        }
+        //觉得参考迷宫回溯问题  需要设置一个特殊的标志位  说明该数字是走不通的
+        int remainIndex = 0;
         
-        return true;
+//        while (remainIndex < remainNum.length){ }
+        //开始赋值
+        sudoku[iPosition][jPosition] = remainNum[remainIndex];
+        remainIndex++;
+        System.out.println("=====================");
+        //可能是第一个值就让他return false了  应该一直算完
+        //在这一步之前
+        if(calSudoku(sudoku)){
+            calSudoku(sudoku);
+            return true;
+        } else {
+            System.out.printf("第%d行第%d列",iPosition,jPosition);
+            sudoku[iPosition][jPosition] = 0; //回溯至最初的位置
+            //所以回溯至此需要进行重新计算来保证方法的持续  问题是如何将源头候选值继续赋给
+//              记录一个不受影响的初始位置 //关键就是在回溯到初始位置后不会再进入运算
+//            if (runTime == 1){
+//                sudoku[iPosition][jPosition] = remainNum[remainIndex];
+//                return true;
+//            }
+            sudoku[iPosition][jPosition] = 0;
+            return false; //不return false就无法实现回溯
+        }
     }
     
     
