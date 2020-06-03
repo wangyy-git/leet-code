@@ -15,6 +15,7 @@ public class Sudoku {
     //应该是当前行 列 方块不包含所有的候选值  且值不重复 且不为0
     //当前方格填入后  后面的方格没有合适的值 false
     //按照方格来计算
+    //把赋值给回溯应该单独拆分成一个方法来实现
     public boolean calSudoku(int[][] sudoku){
         showSudoku(sudoku);
         int[] remainNum = null;
@@ -66,11 +67,6 @@ public class Sudoku {
             sudoku[iPosition][jPosition] = 0; //回溯至最初的位置
             //所以回溯至此需要进行重新计算来保证方法的持续  问题是如何将源头候选值继续赋给
 //              记录一个不受影响的初始位置 //关键就是在回溯到初始位置后不会再进入运算
-//            if (runTime == 1){
-//                sudoku[iPosition][jPosition] = remainNum[remainIndex];
-//                return true;
-//            }
-            sudoku[iPosition][jPosition] = 0;
             return false; //不return false就无法实现回溯
         }
     }

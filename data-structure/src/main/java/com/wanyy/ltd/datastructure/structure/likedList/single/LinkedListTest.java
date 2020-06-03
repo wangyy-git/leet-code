@@ -20,7 +20,7 @@ public class LinkedListTest {
         single.addNodeByOrder(h1);
         single.addNodeByOrder(h4);
         single.addNodeByOrder(h2);
-        iteratorByHead(single.headNode);
+//        iteratorByHead(single.headNode);
         
         SingleLinkedList merge = new SingleLinkedList();
 
@@ -30,7 +30,7 @@ public class LinkedListTest {
         merge.addNodeByOrder(h8);
         
         SingleLinkedListInterview.mergeOrderLinkedList(single,merge);
-        
+        iteratorByHead(single.headNode);
         
 //        SingleLinkedListInterview.reversePrintLink(single.headNode);
         

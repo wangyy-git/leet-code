@@ -103,6 +103,19 @@ class SingleLinkedListInterview {
             mergeCurNext = mergeCurrent.next;
             
             masterLink.addNodeByOrder(mergeCurrent);
+//            HeroNode temp = new HeroNode(0,"head");//0
+//            while (true) {
+//                //此处tempNext是一个新对象，与temp.next的地址是不一样的
+//                //此处node.next虽然与node的类型是一样的，但是性质是不一样的
+//                //一个是变量  一个是变量的属性  所以不能相互替换
+//                HeroNode tempNext = temp.next;
+//                if (tempNext == null || tempNext.no > mergeCurrent.no){
+//                    mergeCurrent.next = tempNext;
+//                    temp.next = mergeCurrent;
+//                    break;
+//                }
+//                temp = temp.next;
+//            }
             
             mergeCurrent = mergeCurNext;
         }
