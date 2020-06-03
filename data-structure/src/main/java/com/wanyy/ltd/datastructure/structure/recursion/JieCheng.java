@@ -8,6 +8,7 @@ public class JieCheng {
     }
     
     public static long jicheng(long n){
+        
         if (n == 1){
             return n;
         } else {

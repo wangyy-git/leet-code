@@ -45,7 +45,7 @@ public class Sudoku {
             return false;
         }
         
-        if (iPosition == 8 && jPosition == 8 && sudoku[8][8] != 0){ //到最后一个位置且如果为空 
+        if (iPosition == 8 && jPosition == 8 && sudoku[8][8] != 0){ //到最后一个位置且如果不为空 
             return true;
         }
         
@@ -116,17 +116,7 @@ public class Sudoku {
     }
     public int[][] generateOriginSudoku(){
         int[][] sudoku = new int[9][9];
-//        Scanner sc = new Scanner(System.in);
         String[] origin = new String[9];
-//        origin[0] = "902183457";
-//        origin[1] = "005209063";
-//        origin[2] = "170460890";
-//        origin[3] = "850020630";
-//        origin[4] = "097604001";
-//        origin[5] = "030050204";
-//        origin[6] = "000010940";
-//        origin[7] = "506302718";
-//        origin[8] = "000000000";
         origin[0] = "308000000";
         origin[1] = "000060009";
         origin[2] = "200000000";
@@ -137,7 +127,6 @@ public class Sudoku {
         origin[7] = "000200000";
         origin[8] = "090000005";
         for (int i=0;i<9;i++){
-//            System.out.printf("请输入%d行的值：",i+1);
             String next = origin[i];
             String[] split = next.split("");
             for (int n=0;n<9;n++){
