@@ -15,26 +15,47 @@ import java.util.Arrays;
  */
 public class SelectSort {
     private static final int[] array = {12,2,4,3,7,11,6,8,5};
+
     public static void main(String[] args) {
         int length = array.length;
 //        boolean flag = false;
-        for (int i=0;i<length;i++){
+        for (int i = 0; i < length; i++) {
             int min = array[i];
             int index = i;
-            for (int j = i+1; j < length; j++) {
-                if (min > array[j]){
+            for (int j = i + 1; j < length; j++) {
+                if (min > array[j]) {
 //                    flag = true;
                     min = array[j];
                     index = j;
                 }
             }
-            
-            int temp = array[i];
-            array[i] = min;
-            array[index] = temp;
+
+            if (index != i) {
+                int temp = array[i];
+                array[i] = min;
+                array[index] = temp;
+            }
             System.out.println(Arrays.toString(array));
         }
 
         System.out.println(Arrays.toString(array));
+    }
+
+    private void selectSort() {
+        for (int i = 0; i < array.length; i++) {
+            int min = array[i];
+            int index = i;
+            for (int j = i + 1; j < array.length; j++) {
+                if (min > array[j]) {
+                    min = array[j];
+                    index = j;
+                }
+            }
+            if (index != i) {
+                int temp = array[i];
+                array[i] = min;
+                array[index] = temp;
+            }
+        }
     }
 }
