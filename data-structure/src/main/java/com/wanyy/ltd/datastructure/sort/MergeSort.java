@@ -10,15 +10,15 @@ public class MergeSort {
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        int length = 8;
+        int length = 800000;
         int[] array = new int[length];
         int[] temp = new int[length];
         for (int i = 0; i < length; i++) {
             array[i] = (int)(Math.random()*length*10);
         }
-        System.out.println(Arrays.toString(array));
+//        System.out.println(Arrays.toString(array));
         mergeSort(array,0,array.length-1,temp);
-        System.out.println(Arrays.toString(array));
+//        System.out.println(Arrays.toString(array));
 //        quick(array,0,array.length-1);
         long end = System.currentTimeMillis();
         System.out.println(end - start);
@@ -53,16 +53,16 @@ public class MergeSort {
          * 先把左右两边(已经有序)的数组按照规则填充到temp数组
          * 直到左右两边其中一边移动完成 (则另一边剩余的也是有序排列的)
          */
-        while (i<=middle && j <= right){
+        while (i <= middle && j <= right){
             if (array[i] <= array[j]){
                 //只用搬就行
                 temp[t] = array[i];
-                t+= 1;
-                i+= 1;
+                t++;
+                i++;
             } else {
                 temp[t] = array[j];
-                t+= 1;
-                j+= 1;
+                t++;
+                j++;
             }
         }
 
@@ -71,16 +71,16 @@ public class MergeSort {
          */
         while (i<=middle){
             temp[t] = array[i];
-            t+= 1;
-            i+= 1;
+            t++;
+            i++;
         }
         /* 第二步
          * 或者右边有剩余
          */
         while (j<=right){
             temp[t] = array[j];
-            t+= 1;
-            j+= 1;
+            t++;
+            j++;
         }
         /* 第三步
          * 将temp copy到array
@@ -88,10 +88,10 @@ public class MergeSort {
          */
         t=0;
         int tempLeft = left;
-        while (tempLeft < right){
+        while(tempLeft <= right) {
             array[tempLeft] = temp[t];
-            t+= 1;
-            tempLeft+= 1;
+            t++;
+            tempLeft++;
         }
         
         
