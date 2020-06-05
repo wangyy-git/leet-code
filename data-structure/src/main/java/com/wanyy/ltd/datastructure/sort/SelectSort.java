@@ -14,34 +14,22 @@ import java.util.Arrays;
  * 总共n-1次；
  */
 public class SelectSort {
-    private static final int[] array = {12,2,4,3,7,11,6,8,5};
+    private static int[] array = {12,2,4,3,7,11,6,8,5};
 
     public static void main(String[] args) {
-        int length = array.length;
-//        boolean flag = false;
+        long start = System.currentTimeMillis();
+        int length = 800000;
+        array = new int[length];
         for (int i = 0; i < length; i++) {
-            int min = array[i];
-            int index = i;
-            for (int j = i + 1; j < length; j++) {
-                if (min > array[j]) {
-//                    flag = true;
-                    min = array[j];
-                    index = j;
-                }
-            }
-
-            if (index != i) {
-                int temp = array[i];
-                array[i] = min;
-                array[index] = temp;
-            }
-            System.out.println(Arrays.toString(array));
+            array[i] = (int)(Math.random()*length*10);
         }
-
-        System.out.println(Arrays.toString(array));
+        selectSort();
+//        System.out.println(Arrays.toString(array));
+        long end = System.currentTimeMillis();
+        System.out.println(end - start);
     }
 
-    private void selectSort() {
+    private static void selectSort() {
         for (int i = 0; i < array.length; i++) {
             int min = array[i];
             int index = i;
