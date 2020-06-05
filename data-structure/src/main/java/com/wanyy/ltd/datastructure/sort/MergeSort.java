@@ -17,8 +17,9 @@ public class MergeSort {
             array[i] = (int)(Math.random()*length*10);
         }
 //        System.out.println(Arrays.toString(array));
-        mergeSort(array,0,array.length-1,temp);
+//        mergeSort(array,0,array.length-1,temp);
 //        System.out.println(Arrays.toString(array));
+        mergeSort(array,0,array.length-1);
 //        quick(array,0,array.length-1);
         long end = System.currentTimeMillis();
         System.out.println(end - start);
@@ -31,7 +32,6 @@ public class MergeSort {
             mergeSort(array,left,middle,temp);
             //向右递归拆解
             mergeSort(array,middle+1,right,temp);
-            
             //合并
             merge(array,left,middle,right,temp);
         }
@@ -48,7 +48,6 @@ public class MergeSort {
         int i =left;
         int j = middle + 1; //右边的起始索引
         int t = 0;//temp的索引记录
-        
         /* 第一步
          * 先把左右两边(已经有序)的数组按照规则填充到temp数组
          * 直到左右两边其中一边移动完成 (则另一边剩余的也是有序排列的)
@@ -65,7 +64,6 @@ public class MergeSort {
                 j++;
             }
         }
-
         /* 第二步
          * 左边有剩余
          */
@@ -93,8 +91,26 @@ public class MergeSort {
             t++;
             tempLeft++;
         }
-        
-        
-        
+    }
+
+    //百度
+    public static int[] mergeSort(int[] nums, int l, int h) {
+        if (l == h)
+            return new int[] { nums[l] };
+
+        int mid = l + (h - l) / 2;
+        int[] leftArr = mergeSort(nums, l, mid); //左有序数组
+        int[] rightArr = mergeSort(nums, mid + 1, h); //右有序数组
+        int[] newNum = new int[leftArr.length + rightArr.length]; //新有序数组
+
+        int m = 0, i = 0, j = 0;
+        while (i < leftArr.length && j < rightArr.length) {
+            newNum[m++] = leftArr[i] < rightArr[j] ? leftArr[i++] : rightArr[j++];
+        }
+        while (i < leftArr.length)
+            newNum[m++] = leftArr[i++];
+        while (j < rightArr.length)
+            newNum[m++] = rightArr[j++];
+        return newNum;
     }
 }
