@@ -19,7 +19,7 @@ public class BinarySearch {
 
     public static void main(String[] args) {
         int[] array = {1,3,3,3,3,4,5,7,8,9,11,13};
-        int find = 3;
+        int find = 1;
         System.out.println(binary(array,0,array.length-1,find));
 
         System.out.println(fiandAll(array,0,array.length-1,find).toString());
@@ -48,6 +48,7 @@ public class BinarySearch {
      * 找到后想左/右分别进行扫描，满足则加入下标
      */
     private static List<Integer> fiandAll(int[] array, int left, int right, int find){
+        System.out.println("查找...");
         List<Integer> indeies = new ArrayList<>();
         int middle = (left + right) / 2;
         if (left > right) {
@@ -58,12 +59,12 @@ public class BinarySearch {
         if (array[middle] == find) {
             
             int index = 1;
-            while (array[middle - index] == find && middle-index>=0) {
+            while (middle-index>=0 && array[middle - index] == find) {
                 indeies.add(middle - (index++));
             }
             indeies.add(middle);
             index = 1;
-            while (array[middle+index] == find && middle+index<array.length) {
+            while (middle+index<array.length && array[middle+index] == find) {
                 indeies.add(middle + (index++));
             }
             return indeies;
