@@ -53,6 +53,71 @@ public class HeroNode {
         return heroNode;
     }
     
+    //在二叉树中判断是否存在  此步骤仅做删除即可
+    public boolean deleteAll(int no){
+        boolean isDelete = false;
+        if (this.left != null && this.left.no == no){
+            this.left = null;
+            return true;
+        } else if (this.right != null && this.right.no == no){
+            this.right = null;
+            return true;
+        }
+        if (this.left != null){
+            isDelete = this.left.deleteAll(no);
+        }
+        if (isDelete) return true;
+        
+        if (this.right != null){
+            isDelete = this.right.deleteAll(no);
+        }
+        return isDelete;
+    }
+    
+    //TODO 非叶子节点不是完全删除
+    //如果其下只有一个节点则用该节点代替
+    //如果有两个子节点 左节点代替，右节点仍然作为右节点
+    public boolean deleteAndReplace(int no){
+        boolean delete = false;
+        if (this.left != null && this.left.no == no){
+            if (this.left.left != null && this.left.right != null){
+                HeroNode right = this.left.right;
+                this.left = this.left.left;
+                this.left.right = right;
+            } else if (this.left.left != null /*&& this.left.right == null 必然为true*/) {
+                this.left = this.left.left;
+                this.left.right = null;
+            } else if(this.left.right != null){
+                this.left = this.left.right;
+                this.left.left = null;
+            }
+            return true;
+        } else if (this.right != null && this.right.no == no){
+            if (this.right.left != null && this.right.right != null){
+                HeroNode right = this.right.right;
+                this.right = this.right.left;
+                this.right.right = right;
+            } else if (this.right.left != null /*&& this.left.right == null 必然为true*/) {
+                this.right = this.right.left;
+                this.right.right = null;
+            } else if(this.right.right != null){
+                this.right = this.right.right;
+                this.right.left = null;
+            }
+            return true;
+        }
+
+        if (this.left != null){
+            delete = this.left.deleteAll(no);
+        }
+        if (delete) return true;
+
+        if (this.right != null){
+            delete = this.right.deleteAll(no);
+        }
+        return delete;
+    }
+    
     /**
      * 1)	如果当前节点的左子节点不为空，递归中序遍历；
      * 2)	输出当前节点；

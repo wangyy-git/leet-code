@@ -10,28 +10,33 @@ public class BinaryTreeTest {
         HeroNode l4 = new HeroNode(4,"L-QP");
 
         HeroNode r1 = new HeroNode(5,"R-VS");
-        HeroNode r2 = new HeroNode(6,"R-EH");
-        HeroNode r3 = new HeroNode(7,"R-ES");
-        HeroNode r4 = new HeroNode(8,"R-SA");
+        HeroNode r2 = new HeroNode(26,"R-EH");
+        HeroNode r3 = new HeroNode(27,"R-ES");
+        HeroNode r4 = new HeroNode(28,"R-SA");
         
         head.setLeft(l1);
-        head.setRight(r1);
-
-        l1.setLeft(l2);
-        l1.setRight(r2);
-
-        r1.setLeft(l3);
-        r1.setRight(r3);
-
+        head.setRight(l2);
+        
+        l2.setRight(l3);
         l2.setLeft(l4);
-        l2.setRight(r4);
+
+//        l1.setLeft(l2);
+////        l1.setRight(r2);
+//
+//        r1.setLeft(l3);
+//        r1.setRight(r3);
+//
+//        l3.setLeft(l4);
+//        l3.setRight(r4);
 
         BinaryTree tree = new BinaryTree();
         tree.setRoot(head);
+//        tree.preOrderIterator();
+//        System.out.println(tree.preOrderSearch(5));
+//        System.out.println(tree.infixOrderSearch(5));
+//        System.out.println(tree.afterOrderSearch(5));
 
-        System.out.println(tree.preOrderSearch(5));
-        System.out.println(tree.infixOrderSearch(5));
-        System.out.println(tree.afterOrderSearch(5));
+//        System.out.println(tree.deleteAll(11));
 //        tree.preOrderIterator();
 //        System.out.println("------------------");
 //        tree.infixOrderIterator();
