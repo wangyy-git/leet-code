@@ -76,7 +76,7 @@ public class HeroNode {
         return isDelete;
     }
     
-    //TODO 非叶子节点不是完全删除
+    //非叶子节点不是完全删除
     //如果其下只有一个节点则用该节点代替
     //如果有两个子节点 左节点代替，右节点仍然作为右节点
     public boolean deleteAndReplace(int no){
