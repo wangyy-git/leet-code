@@ -23,10 +23,12 @@ public class HeroNode {
         System.out.println(this);
         //递归向左遍历
         if (this.left != null){
+            System.out.println("l");
             this.left.preOrderIterator();
         }
         //递归向右遍历
         if (this.right != null){
+            System.out.println("r");
             this.right.preOrderIterator();
         }
     }
@@ -80,27 +82,29 @@ public class HeroNode {
     public boolean deleteAndReplace(int no){
         boolean delete = false;
         if (this.left != null && this.left.no == no){
-            if (this.left.left != null && this.left.right != null){
+            if (this.left.left == null && this.left.right == null){
+                this.left = null;
+                return true;
+            }
+            if (this.left.left != null){
                 HeroNode right = this.left.right;
                 this.left = this.left.left;
                 this.left.right = right;
-            } else if (this.left.left != null /*&& this.left.right == null 必然为true*/) {
-                this.left = this.left.left;
-                this.left.right = null;
             } else if(this.left.right != null){
                 this.left = this.left.right;
                 this.left.left = null;
             }
             return true;
         } else if (this.right != null && this.right.no == no){
-            if (this.right.left != null && this.right.right != null){
+            if (this.right.left == null && this.right.right == null){
+                this.right = null;
+                return true;
+            }
+            if (this.right.left != null){
                 HeroNode right = this.right.right;
                 this.right = this.right.left;
                 this.right.right = right;
-            } else if (this.right.left != null /*&& this.left.right == null 必然为true*/) {
-                this.right = this.right.left;
-                this.right.right = null;
-            } else if(this.right.right != null){
+            }  else if(this.right.right != null){
                 this.right = this.right.right;
                 this.right.left = null;
             }
@@ -108,12 +112,12 @@ public class HeroNode {
         }
 
         if (this.left != null){
-            delete = this.left.deleteAll(no);
+            delete = this.left.deleteAndReplace(no);
         }
         if (delete) return true;
 
         if (this.right != null){
-            delete = this.right.deleteAll(no);
+            delete = this.right.deleteAndReplace(no);
         }
         return delete;
     }

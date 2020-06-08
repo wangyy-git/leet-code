@@ -17,8 +17,8 @@ public class BinaryTreeTest {
         head.setLeft(l1);
         head.setRight(l2);
         
-        l2.setRight(l3);
-        l2.setLeft(l4);
+        l2.setRight(l4);
+        l2.setLeft(l3);
 
 //        l1.setLeft(l2);
 ////        l1.setRight(r2);
@@ -31,7 +31,10 @@ public class BinaryTreeTest {
 
         BinaryTree tree = new BinaryTree();
         tree.setRoot(head);
-//        tree.preOrderIterator();
+        tree.preOrderIterator();
+        System.out.println(tree.deleteAndReplace(2));
+        System.out.println("--------------------------");
+        tree.preOrderIterator();
 //        System.out.println(tree.preOrderSearch(5));
 //        System.out.println(tree.infixOrderSearch(5));
 //        System.out.println(tree.afterOrderSearch(5));
