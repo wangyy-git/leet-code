@@ -26,6 +26,8 @@ public class Test {
         threadedBinaryTree.setRoot(root);
         threadedBinaryTree.infixThreadedNode();
 
+        System.out.println("list=========");
+        threadedBinaryTree.infixList();
         System.out.println(n3.getLeft());
         System.out.println(n3.getRight());
     }

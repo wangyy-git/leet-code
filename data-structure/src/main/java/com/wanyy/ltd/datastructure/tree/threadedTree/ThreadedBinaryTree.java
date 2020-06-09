@@ -10,6 +10,14 @@ public class ThreadedBinaryTree {
         this.root = root;
     }
 
+    public void infixList(){
+        if (root == null){
+            System.out.println("root节点为空");
+            return;
+        }
+        
+        this.root.infixList();
+    }
     public void infixThreadedNode(){
         this.infixThreadedNode(root);
     }
@@ -66,6 +74,16 @@ class HeroNode {
     //0 表示指向的是右子节点 1 表示指向的是后继节点
     private int rightType;
 
+    public void infixList(){
+        if (this.getLeft() != null && this.getLeftType() == 0){
+            this.getLeft().infixList();
+        }
+        System.out.println(this);
+        if (this.getRight() != null && this.getRightType() == 0){
+            this.getRight().infixList();
+        }
+    }
+    
     public HeroNode() {
     }
 
