@@ -1,5 +1,7 @@
 package com.wanyy.ltd.datastructure.tree.sortTree;
 
+import java.util.Arrays;
+
 public class BSTTest {
 
     public static void main(String[] args) {
@@ -15,20 +17,23 @@ public class BSTTest {
         System.out.println(root.searchParentNode(9));
 
         System.out.println("----------------");
-//        System.out.println(root.searchParentNode(12).getRightBranchSmallestNode());
-        bst.delete(1);
-        bst.delete(7);
-        bst.delete(3);
-        bst.delete(10);
-        bst.delete(12);
-        bst.delete(5);
-//        bst.delete();
-        System.out.println("-------------");
-        bst.delete(9);
-        System.out.println("-------------");
-
-        bst.infixList();
-//        root.infixList();
+        int[] sort = new int[array.length];
+        root.infix(sort);
+        System.out.println(Arrays.toString(sort));
+////        System.out.println(root.searchParentNode(12).getRightBranchSmallestNode());
+//        bst.delete(1);
+//        bst.delete(7);
+//        bst.delete(3);
+//        bst.delete(10);
+//        bst.delete(12);
+//        bst.delete(5);
+////        bst.delete();
+//        System.out.println("-------------");
+//        bst.delete(9);
+//        System.out.println("-------------");
+//
+//        bst.infixList();
+////        root.infixList();
 
 
     }
