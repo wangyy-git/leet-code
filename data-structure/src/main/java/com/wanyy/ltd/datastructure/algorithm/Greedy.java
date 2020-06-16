@@ -14,6 +14,9 @@ public class Greedy {
         Map<String, Set<String>> broadcasts = new HashMap<>();
         //各电台覆盖的范围
         Set<String> k1 = new HashSet<>();
+        k1.add("北京");
+        k1.add("上海");
+        k1.add("天津");
 
         Set<String> k2 = new HashSet<>();
         k2.add("北京");
@@ -41,6 +44,11 @@ public class Greedy {
         
         //记录所有需要覆盖的地区 随着计算是会变动的
         Set<String> allAreas = new HashSet<>();
+        allAreas.addAll(k1);
+        allAreas.addAll(k2);
+        allAreas.addAll(k3);
+        allAreas.addAll(k4);
+        allAreas.addAll(k5);
 
 //        System.out.println(allAreas.toString());
         //存放选择的电台的集合
