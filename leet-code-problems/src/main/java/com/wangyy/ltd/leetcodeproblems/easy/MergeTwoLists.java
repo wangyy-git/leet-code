@@ -1,5 +1,7 @@
 package com.wangyy.ltd.leetcodeproblems.easy;
 
+import java.util.List;
+
 /**
  * 将两个升序链表合并为一个新的升序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
  * 示例：
@@ -23,39 +25,37 @@ public class MergeTwoLists {
         l2.next = l21;
         l21.next = l22;
         System.out.println(violetMergeTwoLists(l1, l2));
-//        ListNode answer = answer(l1, l2);
-//        System.out.println(answer);
+        ListNode answer = answer(l1, l2);
+        System.out.println(answer);
 //        System.out.println(mergeTwoLists(l1, l2));
 
     }
 
     public static ListNode violetMergeTwoLists(ListNode l1, ListNode l2) {
+
         if (l2 == null){
-            System.out.println("待合并链表l2为空；");
             return l1;
         }else if(l1 == null){
-            System.out.println("待合并链表l1为空；");
             return l2;
         }
+        
         ListNode pre = new ListNode(-1);
-        ListNode mergeNode = pre;
-        //暴力合并 依次取出然后比较来合并
-//        ListNode temp1 = l1;
-//        ListNode temp2 = l2;
+        ListNode preHead = pre;
+        
         while (l1 != null && l2 != null){
-            
             if (l1.val < l2.val){
-                mergeNode.next = l1;
-//                mergeNode = mergeNode.next;
+                preHead.next = l1;
+                preHead = preHead.next;
                 l1 = l1.next;
             } else {
-                mergeNode.next = l2;
-//                mergeNode = mergeNode.next;
+                preHead.next = l2;
+                preHead = preHead.next;
                 l2 = l2.next;
             }
-            mergeNode = mergeNode.next;
         }
-        mergeNode.next = l1 == null ? l2 : l1;
+
+        preHead.next = l1 == null ? l2 : l1;
+        
         return pre.next;
     }
     
@@ -88,7 +88,7 @@ class ListNode {
     ListNode(int val) { this.val = val; }
     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
     
-//    public String toString(){
-//        return "{val->" + val + ",next->" + next.val + "}";
-//    }
+    public String toString(){
+        return "{val->" + val + ",next->" + next + "}";
+    }
  }

@@ -1,9 +1,6 @@
 package com.wangyy.ltd.leetcodeproblems.easy;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
@@ -36,14 +33,13 @@ public class RemoveDuplicates {
     public static void main(String[] args) {
         int[] nums = {1,2,2,2,3,3,4};
         int len = removeDuplicates(nums);
-
+        System.out.println(Arrays.toString(nums));
         for (int i = 0; i < len; i++) {
             System.out.println(nums[i]); 
         }
     }
 
     public static int removeDuplicates(int[] nums) {
-
         if (nums == null){
             return 0;
         }
