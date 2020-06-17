@@ -8,6 +8,7 @@ public class StringMatch {
         System.out.println(violenceMatch(str1, str2));
         System.out.println(splitThenMatch(str1, str2));
         System.out.println(violenceMatchTeacher(str1, str2));
+        System.out.println("strStr -> " + strStr(str1, str2));
     }
 
     public static int violenceMatchTeacher(String str,String match){
@@ -58,6 +59,17 @@ public class StringMatch {
         for (int i = 0; i < str.length() - match.length(); i++) {
             String substring = str.substring(i, i + match.length());
             if (substring.equals(match)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int strStr(String haystack, String needle){
+        if (needle == null || haystack == null) return -1;
+        for (int i = 0; i < haystack.length() - needle.length() + 1; i++) {
+            String substring = haystack.substring(i, i + needle.length());
+            if (substring.equals(needle)){
                 return i;
             }
         }
