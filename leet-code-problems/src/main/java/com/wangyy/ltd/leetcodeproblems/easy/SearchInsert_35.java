@@ -1,6 +1,6 @@
 package com.wangyy.ltd.leetcodeproblems.easy;
 
-public class SearchInsert35 {
+public class SearchInsert_35 {
 
     public static void main(String[] args) {
         int[] nums = {1,3,5,6};
