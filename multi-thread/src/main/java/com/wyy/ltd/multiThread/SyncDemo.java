@@ -8,7 +8,7 @@ public class SyncDemo {
     
     static {
         //本地方法C文件变异成.so文件对应的文件名
-        System.loadLibrary("getOSThraedId");
+        System.loadLibrary("GetOSThraedIdNative");
     }
     //执行结果为 t1 t2两个线程轮流获取锁 依次执行
     public static void main(String[] args) {
@@ -16,7 +16,6 @@ public class SyncDemo {
         sync.start();
         
     }
-    
     //因为这两个匿名内部类 所以字节码文件是三个
     public void start(){
         Thread t1 = new Thread(new Runnable() {
@@ -33,7 +32,6 @@ public class SyncDemo {
                 }
             }
         });
-
         Thread t2 = new Thread(() -> {
             while (true) {
                 try {
@@ -41,22 +39,17 @@ public class SyncDemo {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                
                 sync();
             }
         });
-        
         t1.setName("t1");
         t2.setName("t2");
-//        t1.setDaemon(true);
-//        t2.setDaemon(true);
         t1.start();
         t2.start();
     }
     
     //因为无法通过java代码获取OS层面的线程ID进行比较 所以增加一个本地方法
     public native void getOSThraedId();
-    
     public void sync(){
         synchronized (o){
             getOSThraedId();
