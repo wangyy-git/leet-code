@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit;
 public class SyncDemo {
 
     Object o = new Object();
-    
     static {
         //本地方法C文件变异成.so文件对应的文件名
         System.loadLibrary("GetOSThraedIdNative");
@@ -49,10 +48,10 @@ public class SyncDemo {
     }
     
     //因为无法通过java代码获取OS层面的线程ID进行比较 所以增加一个本地方法
-    public native void getOSThraedId();
+//    public native void getOSThraedId();
     public void sync(){
         synchronized (o){
-            getOSThraedId();
+//            getOSThraedId();
             System.out.println(Thread.currentThread().getName());
         }
         
