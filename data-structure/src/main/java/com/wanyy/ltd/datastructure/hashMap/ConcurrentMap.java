@@ -31,11 +31,12 @@ public class ConcurrentMap {
                     //实现直接操作内存中的值而不是线程内存缓存的值 保证线程安全
                     //CAS操作 先比较 后计算
                     // 先比较内存中的person.age一致后计算 ++ 
+//                    System.out.println(Thread.currentThread().getName() + " off ->" + AGE_OFFSET);
                     boolean b = UNSAFE.compareAndSwapInt(perso, AGE_OFFSET, perso.age, perso.age+1);
-                    
 //                    person.age++;
                     if(b)
-                    System.out.println(Thread.currentThread().getName() + " ->" + UNSAFE.getIntVolatile(perso,AGE_OFFSET));
+                        System.out.println(Thread.currentThread().getName() + " off ->" + AGE_OFFSET);
+                        System.out.println(Thread.currentThread().getName() + " ->" + UNSAFE.getIntVolatile(perso,AGE_OFFSET));
                     try {
                         TimeUnit.SECONDS.sleep(1);
                     } catch (InterruptedException e) {
@@ -53,7 +54,7 @@ public class ConcurrentMap {
                     boolean b = UNSAFE.compareAndSwapInt(perso, AGE_OFFSET, perso.age, perso.age+1);
 //                    System.out.println(b);
                     if(b)
-                    System.out.println(Thread.currentThread().getName() + " ->" + UNSAFE.getIntVolatile(perso,AGE_OFFSET));
+                        System.out.println(Thread.currentThread().getName() + " ->" + UNSAFE.getIntVolatile(perso,AGE_OFFSET));
                     try {
                         TimeUnit.SECONDS.sleep(1);
                     } catch (InterruptedException e) {
