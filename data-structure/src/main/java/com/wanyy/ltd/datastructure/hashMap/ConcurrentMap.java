@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 public class ConcurrentMap {
 
     private static sun.misc.Unsafe UNSAFE;
-    private static  Long AGE_OFFSET;
+    private static Long AGE_OFFSET;
     
     static {
         try {

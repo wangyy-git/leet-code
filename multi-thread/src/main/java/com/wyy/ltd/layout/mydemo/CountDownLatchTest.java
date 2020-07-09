@@ -1,5 +1,8 @@
 package com.wyy.ltd.layout.mydemo;
 
+import com.wyy.ltd.layout.A;
+import org.openjdk.jol.info.ClassLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -11,7 +14,9 @@ public class CountDownLatchTest {
  
     static CountDownLatch latch = new CountDownLatch(1);
     public static void main(String[] args) throws InterruptedException {
-        runPool();
+        CountDownLatchTest t = new CountDownLatchTest();
+        t.runTogether();
+//        runTogether();
     }
 
     static CountDownLatch latch2 = new CountDownLatch(10);
@@ -32,44 +37,40 @@ public class CountDownLatchTest {
 //        ser.shutdownNow();
 
     }
-    private static void runTogether() throws InterruptedException {
+    static A a = new A();
+    private void runTogether() throws InterruptedException {
         new Thread(()->{
             try {
-//                latch.await();
-                TimeUnit.SECONDS.sleep(6);
+                latch.await();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("t1");
-            latch.countDown();
+            run();
         }).start();
         new Thread(()->{
             try {
-                TimeUnit.SECONDS.sleep(3);
+                latch.await();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("t2");
-            latch.countDown();
+            run();
         }).start();
         new Thread(()->{
             try {
-//                latch.await();
-                TimeUnit.SECONDS.sleep(1);
+                latch.await();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("t3");
-            latch.countDown();
+            run();
         }).start();
-        latch.await();
+        latch.countDown();
         System.out.println("end");
     }
     
-    static List<String> a = new ArrayList<>();
+    static List<String> list = new ArrayList<>();
     static {
         for (int i = 0; i < 9; i++) {
-            a.add("a" + i);
+            list.add("a" + i);
         }
     }
     private static void test(){
@@ -78,12 +79,37 @@ public class CountDownLatchTest {
         for (int i = 0; i < 9; i++) {
             int finalI = i;
             service.execute(()->{
-                System.out.println(Thread.currentThread().getName() + a.get(finalI));
-                a.add(a.get(finalI) + "exe");
+                System.out.println(Thread.currentThread().getName() + list.get(finalI));
+                list.add(list.get(finalI) + "exe");
             });
         }
 //        for (String s:a) {
 //            
 //        }
+    }
+
+    private int tickets = 10;
+
+    public synchronized void run() {
+        while (true) {
+            if (tickets > 0) {
+//                System.out.println("还剩余票:" + tickets + "张");
+                try {
+                    TimeUnit.MILLISECONDS.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                tickets--;
+                System.out.println(Thread.currentThread().getName() + "卖出第" + tickets + "张");
+            } else {
+                System.out.println("余票不足,暂停出售!");
+//                wait，notify和notifyAll只能在同步控制方法或者同步控制块里面使用，而sleep可以在任何地方使用
+                try {
+                    Thread.sleep(1000 * 60 * 5);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
