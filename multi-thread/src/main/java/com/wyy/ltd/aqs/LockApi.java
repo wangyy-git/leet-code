@@ -1,6 +1,7 @@
 package com.wyy.ltd.aqs;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.LockSupport;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -14,7 +15,8 @@ public class LockApi {
         });
         t1.start();
         ReentrantLock reentrantLock = new ReentrantLock();
-        
+        reentrantLock.lock();
+        Condition condition = reentrantLock.newCondition();
         reentrantLock.unlock();
         System.out.println("main notify t1 ... ");
         TimeUnit.SECONDS.sleep(5);

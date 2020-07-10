@@ -17,18 +17,19 @@ import java.util.List;
  */
 public class LongestPalindrome_5 {
     public static void main(String[] args) {
-        String s = "bb";
-        System.out.println(longestPalindrome(s));
+        String s = "a";
+//        System.out.println(longestPalindrome(s));
+        LongestPalindrome_5 lo = new LongestPalindrome_5();
+        System.out.println(lo.longestPalindrome(s));
     }
 
     //可以优化一下 只记录index begin end
-    static int longestLength = 0; //记录上一次的index
-    static String result;
-    public static String longestPalindrome(String s) {
-        if (s.length() <= 1) return s;
+    int longestLength = 0; //记录上一次的index
+    String result;
+    public String longestPalindrome(String s) {
+        if (s == null || s.length() <= 1) return s;
         int length = s.length();
         String[] split = s.split("");
-        
         for (int i = (length%2==0?length/2:length/2+1); i >= longestLength/2; i--) {
             find(i, split);
         }
@@ -40,7 +41,7 @@ public class LongestPalindrome_5 {
     }
     
     
-    private static void find(int i,String[] split){
+    private void find(int i,String[] split){
         int length = split.length;
         //往右移
         if (i+1 < length && split[i+1].equals(split[i])){
@@ -125,5 +126,92 @@ public class LongestPalindrome_5 {
             }
         }
         
+    }
+
+    private void find2(int i,String[] split){
+        int length = split.length;
+        //往右移
+        if (i+1 < length && split[i+1].equals(split[i])){
+            StringBuilder sb = new StringBuilder();
+            int index = 0;
+            sb.append(split[i-index]).append(split[i+index+1]);
+            while (true){
+                index++;
+                if (i + index + 1 == length || i - index < 0) {
+                    if (longestLength < sb.length()){
+                        longestLength = sb.length();
+                        result = sb.toString();
+                    }
+                    break;
+                }
+                String rc = split[i + index + 1];//右侧的char
+                String lc = split[i - index];//左侧
+
+                if (rc.equals(lc)){
+                    sb = (new StringBuilder(lc)).append(sb).append(rc);
+                } else {
+                    if (longestLength < sb.length()){
+                        longestLength = sb.length();
+                        result = sb.toString();
+                    }
+                    break;
+                }
+            }
+        }
+
+        if (i >= 1 && split[i-1].equals(split[i])){
+            StringBuilder sb = new StringBuilder();
+            int index = 0;
+            //i+index-1 往左移 i-index 往右 index<0
+            sb.append(split[i+index-1]).append(split[i-index]);
+            while (true){
+                index--;
+                if (i + index - 1 < 0 || i-index == length) {
+                    if (longestLength < sb.length()){
+                        longestLength = sb.length();
+                        result = sb.toString();
+                    }
+                    break;
+                }
+                String lc = split[i + index - 1];//左侧的char
+                String rc = split[i - index];//right
+                if (rc.equals(lc)){
+                    sb = (new StringBuilder(lc)).append(sb).append(rc);
+                } else {
+                    if (longestLength < sb.length()){
+                        longestLength = sb.length();
+                        result = sb.toString();
+                    }
+                    break;
+                }
+            }
+        }
+        //最后一种情况
+        StringBuilder sb = new StringBuilder();
+        int index = 0;
+        sb.append(split[i]);
+        //这个地方还是要记录一下lastIndex
+        while (true){
+            index++;
+            if (i + index == length || i-index < 0) {
+                if (longestLength < sb.length()){
+                    longestLength = sb.length();
+                    result = sb.toString();
+                }
+                break;
+            }
+            String rc = split[i + index];//右侧的char
+            String lc = split[i - index];//左侧
+            if (rc.equals(lc)){
+                sb = (new StringBuilder(lc)).append(sb).append(rc);
+            } else {
+                if (longestLength < sb.length()){
+                    longestLength = sb.length();
+                    result = sb.toString();
+                }
+                break;
+            }
+        }
+
     }
 }
