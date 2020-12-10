@@ -18,7 +18,7 @@ package com.wangyy.ltd.leetcodeproblems.easy;
  * 以此往前推，则可以获取实际爬楼所需要的步数
  * 自己最初的思路是通过遍历获取实际需要的步数
  */
-public class ClimbStairs_70 {
+public class L_70_ClimbStairs {
 
     public static void main(String[] args) {
         System.out.println(climbStairs(5));

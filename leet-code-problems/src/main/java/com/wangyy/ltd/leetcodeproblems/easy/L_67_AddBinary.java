@@ -2,7 +2,7 @@ package com.wangyy.ltd.leetcodeproblems.easy;
 
 import java.util.Arrays;
 
-public class AddBinary_67 {
+public class L_67_AddBinary {
 
     public static void main(String[] args) {
        

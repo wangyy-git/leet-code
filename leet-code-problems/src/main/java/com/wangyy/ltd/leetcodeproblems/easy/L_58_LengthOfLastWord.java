@@ -10,7 +10,7 @@ import java.util.Arrays;
  * 输入: "Hello World"
  * 输出: 5
  */
-public class LengthOfLastWord_58 {
+public class L_58_LengthOfLastWord {
 
     public static void main(String[] args) {
         String s = "Hello  World ";

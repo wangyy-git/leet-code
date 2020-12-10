@@ -12,7 +12,7 @@ package com.wangyy.ltd.leetcodeproblems.easy;
  *  [ 7, 6, 5 ]
  * ]
  */
-public class GenerateMatrix_59 {
+public class L_59_GenerateMatrix {
 
     public static void main(String[] args) {
         int[][] ints = generateMatrix(7);

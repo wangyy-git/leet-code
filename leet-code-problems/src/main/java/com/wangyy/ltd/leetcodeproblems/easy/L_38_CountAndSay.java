@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class CountAndSay_38 {
+public class L_38_CountAndSay {
     public static void main(String[] args) {
 //        for (int i = 1; i < 11; i++) {
 //            System.out.println(countAndSay(i));

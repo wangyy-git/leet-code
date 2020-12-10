@@ -11,7 +11,7 @@ package com.wangyy.ltd.leetcodeproblems.easy;
  * }
  * node的定义@See MergeTwoLists
  */
-public class DeleteDuplicateNode_83 {
+public class L_83_DeleteDuplicateNode {
     public static void main(String[] args) {
         ListNode l1 = new ListNode(1);
         ListNode l2 = new ListNode(1);
