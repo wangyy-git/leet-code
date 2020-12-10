@@ -28,7 +28,7 @@ import java.util.*;
  *     print(nums[i]);
  * }
  */
-public class RemoveDuplicates {
+public class L_26_RemoveDuplicates {
 
     public static void main(String[] args) {
         int[] nums = {1,2,2,2,3,3,4};

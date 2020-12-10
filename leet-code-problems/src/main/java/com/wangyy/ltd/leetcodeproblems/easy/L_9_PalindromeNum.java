@@ -3,7 +3,7 @@ package com.wangyy.ltd.leetcodeproblems.easy;
 /**
  * 判断是否是回文数
  */
-public class PalindromeNum {
+public class L_9_PalindromeNum {
     public static void main(String[] args) {
         System.out.println(answer(112211));
     }

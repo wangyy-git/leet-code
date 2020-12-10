@@ -1,6 +1,6 @@
 package com.wangyy.ltd.leetcodeproblems.easy;
 
-public class LongestCommonPrefix {
+public class L_14_LongestCommonPrefix {
 
     public static void main(String[] args) {
         String[] strs = {"d"};
