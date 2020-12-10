@@ -16,7 +16,7 @@ import java.util.Arrays;
  * 解释: 输入数组表示数字 4321。
  */
 
-public class PlusOne_66 {
+public class L_66_PlusOne {
 
     public static void main(String[] args) {
         System.out.println(10 % 10);

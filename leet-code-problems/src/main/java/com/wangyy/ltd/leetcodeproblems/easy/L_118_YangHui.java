@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class YangHui {
+public class L_118_YangHui {
 
     public static void main(String[] args) {
         List<List<Integer>> generate = generate(6);

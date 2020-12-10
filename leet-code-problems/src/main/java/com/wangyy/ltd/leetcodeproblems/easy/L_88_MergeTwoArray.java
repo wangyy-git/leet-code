@@ -14,7 +14,7 @@ import java.util.Arrays;
  * nums1.length == m + n
  * nums2.length == n
  */
-public class MergeTwoArray_88 {
+public class L_88_MergeTwoArray {
     public static void main(String[] args) {
         int[] nums1 = new int[]{1,2,2,0,0,0};
         int[] nums2 = new int[]{2,5,6};

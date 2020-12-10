@@ -28,7 +28,7 @@ import java.util.List;
  * }
  */
     
-public class RemoveDuplicateNodes_305 {
+public class L_305_RemoveDuplicateNodes {
 
     public static void main(String[] args) {
         ListNode l1 = new ListNode(1);
